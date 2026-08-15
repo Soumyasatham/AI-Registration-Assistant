@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <h1>📊 Registration Admin Dashboard</h1>
+
+        <p>Total Registrations: {{ registrations|length }}</p>
+
+        {% if registrations %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Field</th>
+                    <th>Experience</th>
+                    <th>Registration Time</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for registration in registrations %}
+
+                <tr>
+
+                    <td>{{ loop.index }}</td>
+
+                    <td>{{ registration.name }}</td>
+
+                    <td>{{ registration.email }}</td>
+
+                    <td>{{ registration.field }}</td>
+
+                    <td>{{ registration.experience }}</td>
+
+                    <td>
+                        {{ registration.registration_time }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <p>No registrations found.</p>
+
+        {% endif %}
+
+        <br>
+
+        <a href="/">← Back to Chatbot</a>
+
+    </div>
+
+</body>
+
+</html>
