@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Registration Assistant</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+    <div class="chat-container">
+
+        <div class="chat-header">
+
+            <h2>🤖 AI Registration Assistant</h2>
+
+            <p>
+                AI & Data Science Internship
+            </p>
+
+        </div>
+
+
+        <!-- REGISTRATION PROGRESS BAR -->
+
+        <div class="progress-container">
+
+            <div class="progress-bar">
+
+                <div id="progress"></div>
+
+            </div>
+
+            <p id="progress-text">
+                Registration Progress: 0%
+            </p>
+
+        </div>
+
+
+        <!-- CHAT AREA -->
+
+        <div id="chat-box"
+             class="chat-box">
+
+            <div class="message bot-message">
+
+                Hello! 👋
+
+                <br><br>
+
+                I am your AI Internship Registration Assistant.
+
+                <br><br>
+
+                You can ask me about the internship or type
+                <b>"register"</b> to begin.
+
+            </div>
+
+        </div>
+
+
+        <!-- INPUT AREA -->
+
+        <div class="input-container">
+
+            <input
+                type="text"
+                id="user-input"
+                placeholder="Type your message..."
+            >
+
+            <button onclick="sendMessage()">
+
+                Send
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+
+        // -------------------------
+        // UPDATE REGISTRATION PROGRESS
+        // -------------------------
+
+        function updateProgress(message) {
+
+            const progress =
+                document.getElementById("progress");
+
+            const progressText =
+                document.getElementById("progress-text");
+
+            const text =
+                message.toLowerCase();
+
+            let percentage = 0;
+
+
+            if (
+                text.includes("full name") ||
+                text.includes("enter your full name")
+            ) {
+
+                percentage = 20;
+
+            }
+
+            else if (
+                text.includes("email address")
+            ) {
+
+                percentage = 40;
+
+            }
+
+            else if (
+                text.includes("field of study")
+            ) {
+
+                percentage = 60;
+
+            }
+
+            else if (
+                text.includes("programming experience")
+            ) {
+
+                percentage = 80;
+
+            }
+
+            else if (
+                text.includes("confirm your registration")
+            ) {
+
+                percentage = 100;
+
+            }
+
+
+            progress.style.width =
+                percentage + "%";
+
+            progressText.innerText =
+                "Registration Progress: " +
+                percentage + "%";
+
+        }
+
+
+        // -------------------------
+        // SEND MESSAGE
+        // -------------------------
+
+        async function sendMessage() {
+
+            const input =
+                document.getElementById("user-input");
+
+            const message =
+                input.value.trim();
+
+
+            if (message === "") {
+
+                return;
+
+            }
+
+
+            const chatBox =
+                document.getElementById("chat-box");
+
+
+            // Display user message
+
+            chatBox.innerHTML += `
+
+                <div class="message user-message">
+
+                    ${message}
+
+                </div>
+
+            `;
+
+
+            input.value = "";
+
+
+            // -------------------------
+            // TYPING INDICATOR
+            // -------------------------
+
+            const typingId =
+                "typing-" + Date.now();
+
+
+            chatBox.innerHTML += `
+
+                <div
+                    id="${typingId}"
+                    class="message bot-message typing"
+                >
+
+                    🤖 Assistant is typing...
+
+                </div>
+
+            `;
+
+
+            chatBox.scrollTop =
+                chatBox.scrollHeight;
+
+
+            // -------------------------
+            // SEND MESSAGE TO FLASK
+            // -------------------------
+
+            const response =
+                await fetch("/chat", {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body: JSON.stringify({
+
+                        message: message
+
+                    })
+
+                });
+
+
+            const data =
+                await response.json();
+
+
+            // -------------------------
+            // REMOVE TYPING INDICATOR
+            // -------------------------
+
+            const typingMessage =
+                document.getElementById(typingId);
+
+
+            if (typingMessage) {
+
+                typingMessage.remove();
+
+            }
+
+
+            // -------------------------
+            // DISPLAY BOT RESPONSE
+            // -------------------------
+
+            chatBox.innerHTML += `
+
+                <div class="message bot-message">
+
+                    ${data.response}
+
+                </div>
+
+            `;
+
+
+            // Update progress bar
+
+            updateProgress(data.response);
+
+
+            // Automatically scroll down
+
+            chatBox.scrollTop =
+                chatBox.scrollHeight;
+
+        }
+
+
+        // -------------------------
+        // ENTER KEY SUPPORT
+        // -------------------------
+
+        document
+            .getElementById("user-input")
+            .addEventListener(
+                "keypress",
+                function(event) {
+
+                    if (event.key === "Enter") {
+
+                        sendMessage();
+
+                    }
+
+                }
+            );
+
+
+    </script>
+
+</body>
+
+</html>
