@@ -1,0 +1,102 @@
+{
+  "greeting": [
+    "hi",
+    "hii",
+    "hiii",
+    "hello",
+    "helloo",
+    "hey",
+    "heyy",
+    "good morning",
+    "good evening",
+    "hi there",
+    "hello there",
+    "hey there"
+],
+
+    "register": [
+        "I want to register",
+        "I want to apply",
+        "how can I join",
+        "sign me up",
+        "I want to join the internship",
+        "start registration",
+        "register me",
+        "I want to enroll",
+        "apply",
+        "i want to register for the internship",
+        "I want to register for the program"
+    ],
+
+    "help": [
+    "help",
+    "help me",
+    "I need help",
+    "can you help me",
+    "can you guide me",
+    "guide me",
+    "I need assistance",
+    "I need support",
+    "support me",
+    "assist me",
+    "what can you do",
+    "how can you help me"
+],
+
+    "internship_info": [
+    "what is this internship",
+    "tell me about the internship",
+    "tell me about this internship",
+    "what is the internship about",
+    "give me internship details",
+    "what will I learn",
+    "what skills are required",
+    "what is this program",
+    "tell me about the program",
+    "internship information",
+    "I want internship details",
+    "what does this internship offer",
+    "can you explain the internship",
+    "give me more information",
+    "what are the internship benefits",
+    "how long is the internship"
+],
+
+    "thank_you": [
+    "thank you",
+    "thanks",
+    "thanks a lot",
+    "thank you so much",
+    "thanks for helping",
+    "I appreciate it",
+    "I appreciate your help",
+    "thank you for your help",
+    "thanks chatbot",
+    "many thanks",
+    "thank you very much",
+    "that's helpful",
+    "great thanks",
+    "thanks for the information"
+],
+"goodbye": [
+    "bye",
+    "byee",
+    "byeee",
+    "goodbye",
+    "good bye",
+    "bye bye",
+    "see you",
+    "see you later",
+    "talk to you later",
+    "catch you later",
+    "exit",
+    "quit",
+    "close chatbot",
+    "i am leaving",
+    "i am going",
+    "i need to go",
+    "gotta go",
+    "see ya"
+]
+
+}
